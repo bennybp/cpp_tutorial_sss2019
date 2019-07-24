@@ -13,7 +13,7 @@
 
 int main(void)
 {
-    // size of vectors
+    // Size of vectors
     size_t size = 10;
 
     // Allocate memory for all pointers
@@ -26,8 +26,7 @@ int main(void)
     // Initialize dot product variables (for storing results)
     double dot_product_ptr(0), dot_product_smrt(0), dot_product_eigen;
 
-    // Raw pointer
-
+    // Raw pointers
     for(size_t i = 0; i < size; i++) {
 
 	vector_ptr1[i] = i;
@@ -39,8 +38,7 @@ int main(void)
     delete[] vector_ptr1;
     delete[] vector_ptr2;
 
-    // Smart pointer
-
+    // Smart pointers
     for(size_t i = 0; i < size; i++) {
 
 	vector_smrt1[i] = i;
@@ -49,8 +47,10 @@ int main(void)
 	dot_product_smrt += vector_smrt1[i] * vector_smrt2[i];
     }
 
-    // Eigen vectors
+    // No need to free allocated memory! However, in most (but not all) scenarios 
+    // std::vector/array are more practical to use than std::unique_ptr<[]> 
 
+    // Eigen vectors
     for(size_t i = 0; i < size; i++) {
 
 	vector_eigen1[i] = i;
@@ -59,6 +59,7 @@ int main(void)
 
     dot_product_eigen = vector_eigen1.dot(vector_eigen2);
 
+    // Print dot product output
     std::cout << "dot product (raw pointers) = "  << dot_product_ptr << std::endl << 
     "dot product (smart pointers) = " << dot_product_smrt << std::endl << 
     "dot product (eigen) = " << dot_product_eigen << std::endl;
